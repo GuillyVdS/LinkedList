@@ -27,8 +27,8 @@ void pushToList(ListNode ** head_ptr, char * newvalue) {
         //printf("creating\n" );
         *head_ptr = (ListNode *)malloc(sizeof(ListNode));
 
-        (*head_ptr)->value = (char *)malloc(sizeof(10)) ;
-        memcpy((*head_ptr)->value, newvalue, strlen(newvalue));
+        (*head_ptr)->value = (char *)malloc(strlen(newvalue) + 1) ;
+        strcpy((*head_ptr)->value, newvalue);
         (*head_ptr)->next = NULL;
       }
       else{
@@ -41,7 +41,9 @@ void pushToList(ListNode ** head_ptr, char * newvalue) {
 
         //sets pointer to refer to new node in the list and sets value of new node
         currentNode->next = (ListNode *) malloc(sizeof(ListNode));
-        currentNode->next->value = newvalue;
+        currentNode->next->value = (char *)malloc(strlen(newvalue) + 1) ;
+        strcpy(currentNode->next->value, newvalue);
+        //currentNode->next->value = newvalue;
         currentNode->next->next = NULL;
       }
   }
@@ -108,7 +110,7 @@ int main(){
   memcpy(head->value, "MEMTEST", strlen("MEMTEST"));
   head->next = NULL;*/
 
-/*
+
   while(status != 'e'){
     char status = 'i';
     printf("Please choose one of the following: (P)rint current list, (A)dd item to list, (R)emove item from list, (E)xit.\n");
@@ -136,11 +138,11 @@ int main(){
         printf("Terminating Program...\n");
         return 0;
     }
-  }*/
+  }
 
 
 
-
+/*
 
   pushToList(&head, "WOOF\0"); //& used to pass memory address of head into the function so the function can alter the variable at the location in the parent scope
   pushToList(&head, "WOOF\0"); //will need to fix second value, currently program will delete first value if it matches strcmp, if second value matches it will again delete said value and thus delete the head value.
@@ -160,19 +162,7 @@ int main(){
   pushToList(&head, "MAOW\0");
   pushToList(&head, "MAOW\0");
   printf("----\n");
-  removeItemFromList(&head, "BARK");
+  //removeItemFromList(&head, "BARK");
   printItemsInList(head);
-
-
-
-
-
-
-  /*
-  printf("Please enter string: ");
-  char * string;
-  scanf("%s\0" , string);
-  printf("%s\n", string );
 */
-
 }
